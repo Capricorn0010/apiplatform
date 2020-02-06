@@ -1,0 +1,67 @@
+
+**** Error file opened at 20191116 165524 China Standard Time Rel 3.0.1 (2008-10-21) [720.63]
+Error:  >Sat Nov 16 16:55:24,932<    
+RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=ABAP ASHOST=192.168.68.20 SYSNR=00 SAPROUTER=/H/116.62.119.46/S/3299/H/ PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       timeout occured
+TIME        Sat Nov 16 16:55:24 2019
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -5
+MODULE      nibuf.cpp
+LINE        4771
+DETAIL      NiBufIConnect: route connect
+            '/H/116.62.119.46/S/3299/H/192.168.68.20' timeout
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+Error:  >Sat Nov 16 16:56:15,953<    
+RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=ABAP ASHOST=192.168.68.20 SYSNR=00 SAPROUTER=/H/116.62.119.46/S/3299/H/ PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       timeout occured
+TIME        Sat Nov 16 16:56:15 2019
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -5
+MODULE      nibuf.cpp
+LINE        4771
+DETAIL      NiBufIConnect: route connect
+            '/H/116.62.119.46/S/3299/H/192.168.68.20' timeout
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+**** Error file opened at 20191116 170425 China Standard Time Rel 3.0.1 (2008-10-21) [720.63]
+Error:  >Sat Nov 16 17:04:25,694<    
+RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=ABAP ASHOST=192.168.68.20 SYSNR=00 SAPROUTER=/H/116.62.119.46/S/3299/H/ PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       timeout occured
+TIME        Sat Nov 16 17:04:25 2019
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -5
+MODULE      nibuf.cpp
+LINE        4771
+DETAIL      NiBufIConnect: route connect
+            '/H/116.62.119.46/S/3299/H/192.168.68.20' timeout
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION

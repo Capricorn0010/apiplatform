@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.carson.dianxiaotong.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.carson.dianxiaotong.entity.User">
+        <id column="id" property="id" />
+        <result column="opp_id" property="oppId" />
+        <result column="wechat_name" property="wechatName" />
+        <result column="real_name" property="realName" />
+        <result column="phone_number" property="phoneNumber" />
+        <result column="address" property="address" />
+        <result column="region" property="region"/>
+        <result column="rate" property="rate" />
+        <result column="password" property="password" />
+        <result column="role" property="role" />
+        <result column="money" property="money" />
+        <result column="gender" property="gender" />
+        <result column="status" property="status" />
+        <result column="remark" property="remark" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <resultMap id="MemberResultMap" type="com.github.carson.dianxiaotong.model.MemberModel">
+        <id column="id" property="id"/>
+        <result column="opp_id" property="oppId"/>
+        <result column="wechat_name" property="wechatName"/>
+        <result column="real_name" property="realName"/>
+        <result column="phone_number" property="phoneNumber"/>
+        <result column="address" property="address"/>
+        <result column="region" property="region"/>
+        <result column="rate" property="rate"/>
+        <result column="password" property="password"/>
+        <result column="role" property="role"/>
+        <result column="money" property="money"/>
+        <result column="gender" property="gender"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="hotel_name" property="hotelName"/>
+        <result column="hotel_id" property="hotelId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, opp_id, wechat_name, real_name, phone_number, address, rate, password, role, money, gender, status, remark,
+        create_by, create_time, update_by, update_time,region
+    </sql>
+
+    <select id="queryMember" resultMap="MemberResultMap">
+        select
+        user.id,user.opp_id,user.wechat_name,user.real_name,user.phone_number,user.address,user.rate,user.password,user.role,user.money,user.gender,user.status,user.remark,user.create_by,user.create_time,user.update_by,user.update_time,user.region,hotel.id
+        hotel_id,hotel.name hotel_name
+        from user
+        left join member_hotel_rel on member_hotel_rel.user_id = user.id and member_hotel_rel.status = #{status}
+        left join hotel on hotel.id = member_hotel_rel.hotel_id and hotel.status = #{status}
+        where user.status = #{status}
+        and user.role = #{role}
+        <if test="memberNumber != null and memberNumber != ''">
+            and user.id like #{memberNumber}
+        </if>
+        <if test="wechatName != null and wechatName != ''">
+            and user.wechat_name like #{wechatName}
+        </if>
+        <if test="realName != null and realName != ''">
+            and user.real_name like #{realName}
+        </if>
+        <if test="phoneNumber != null and phoneNumber != ''">
+            and user.phone_number like #{phoneNumber}
+        </if>
+        <if test="oppId != null and oppId != ''">
+            and user.opp_id like #{oppId}
+        </if>
+        <if test="gender != null">
+            and user.gender = #{gender}
+        </if>
+        <if test="hotelId != null and hotelId != 0">
+            and hotel.id = #{hotelId}
+        </if>
+        <if test="hotelName != null and hotelName != ''">
+            and hotel.name like #{hotelName}
+        </if>
+
+    </select>
+
+    <update id="batchUpdateYesterdayAgentMoney">
+        update user join
+        (
+        select user.id,sum(orders.order_price) money
+        from user ,hotel,category,device,orders
+        where
+        user.id = hotel.agent_user_id
+        and hotel.id = category.hotel_id
+        and category.id = device.category_id
+        and device.device_no = orders.device_no
+        and hotel.status = #{status}
+        and user.status = #{status}
+        and user.role = #{role}
+        and category.status = #{status}
+        and device.status = #{status}
+        and orders.status = #{status}
+        and date(orders.finish_time) = date(DATE_SUB(NOW(),INTERVAL 1 DAY))
+        group by user.id
+        ) updateRecord on user.id = updateRecord.id
+        set user.money = user.money + updateRecord.money * user.rate
+    </update>
+
+    <update  id="updateByOrg" >
+        ${org}
+    </update >
+
+</mapper>

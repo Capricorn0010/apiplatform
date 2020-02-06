@@ -1,0 +1,82 @@
+spring:
+  # 环境 dev|test|prod
+  #  profiles:
+  #    active: @profileActive@
+  #  application:
+  #    name: dianxiaotong
+  #  datasource:
+  #    driver-class-name: com.mysql.jdbc.Driver
+  #    hikari:
+  #      connection-test-query: select 1
+  #      max-lifetime: 30000
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 20MB
+server:
+  port: 6085
+  tomcat:
+    max-http-post-size: 20971520
+#  servlet:
+#    context-path: /api
+
+#power-line-share:
+#  upload-file-path: D:/share/
+
+logging:
+  file: logs/api.log
+  path: logs/api
+  level:
+    root: info
+    com.github.carson.dianxiaotong: debug
+
+#management:
+#  endpoint:
+#    env:
+#      enabled: true
+#    health:
+#      show-details: always
+#  endpoints:
+#    web:
+#      base-path: /
+#      exposure:
+#        include: env,health
+
+#mybatis-plus:
+#  mapper-locations: classpath:/mapper/*.xml
+#  #实体扫描，多个package用逗号或者分号分隔
+#  typeAliasesPackage: com.github.carson.dianxiaotong.entity
+#  typeEnumsPackage: com.github.carson.dianxiaotong.entity.enums
+#  configuration:
+#    cache-enabled: false
+#    map-underscore-to-camel-case: true
+#  global-config:
+#    db-config:
+#      logic-delete-value: 0
+#      logic-not-delete-value: 1
+#    db-column-underline: true
+#    field-strategy: 2
+#    refresh-mapper: true
+#    sql-parser-cache: true
+
+jwt:
+  enable: false
+
+#sap连接配置
+sap:
+  jco:
+    provider:
+      destName: ABAP
+      ashost: 192.168.68.20
+      sysnr: 00
+      client: 130
+      user: RFCUSER
+      passwd: 654321
+      pool_capacity: 10
+      peak_limit: 50
+      lang: zh
+
+  
